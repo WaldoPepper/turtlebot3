@@ -162,4 +162,19 @@
     </inertial>
   </link>
 
+  <joint name="camera_joint" type="fixed">
+     <parent link="base_link"/>
+     <child link="camera_link"/>
+     <origin rpy="1.396263441 3.141592 1.57079633" xyz="0.042 0 0.105"/>
+    </joint>
+
+  <link name="camera_link">
+    <visual>
+      <geometry>
+        <cylinder length="0.015" radius="0.0075"/>
+      </geometry>
+      <material name="grey"/>
+    </visual>
+  </link>
+
 </robot>
