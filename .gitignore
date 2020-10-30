@@ -60,3 +60,5 @@ build-*/
 *.gch
 
 turtlebot3_bringup/.idea/
+
+.idea/
