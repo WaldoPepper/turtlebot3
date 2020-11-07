@@ -20,7 +20,7 @@ class IBUSSubscriber
     {
         geometry_msgs::Twist vel_msg;
 
-        ROS_INFO("message is %d", msg.ch1);
+        //ROS_INFO("message is %d", msg.ch1);
 
         double angular = double (msg.ch1);
         double speed = double (msg.ch2);
@@ -51,6 +51,8 @@ int main(int argc, char **argv)
 
   // Create a new node_example::Talker object.
   IBUSSubscriber node(nh);
+
+  ROS_INFO("IBUS subscriber running...");
 
   // Let ROS handle all callbacks.
   ros::spin();
