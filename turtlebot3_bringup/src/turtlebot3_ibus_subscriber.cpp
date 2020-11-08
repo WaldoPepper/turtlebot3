@@ -7,57 +7,58 @@
 
 class IBUSSubscriber
 {
- public:
-  explicit IBUSSubscriber(ros::NodeHandle nh)
-  {
-      // Create a subscriber.
-      // Name the topic, message queue, callback function with class name, and object containing callback function.
-      sub_ = nh.subscribe("ibus", 10, &IBUSSubscriber::messageCallback, this);
-      pub_ = nh.advertise<geometry_msgs::Twist>("cmd_vel", 10);
-  }
+    public:
+        explicit IBUSSubscriber(ros::NodeHandle nh)
+        {
+            // Create a subscriber to /ibus
+            sub_ = nh.subscribe("ibus", 10, &IBUSSubscriber::messageCallback, this);
 
-  void messageCallback(const ibus_protocol::IBUS& msg)
-    {
-        geometry_msgs::Twist vel_msg;
+            // Create a publisher to /cmd_vel
+            pub_ = nh.advertise<geometry_msgs::Twist>("cmd_vel", 10);
+        }
 
-        //ROS_INFO("message is %d", msg.ch1);
+      void messageCallback(const ibus_protocol::IBUS& msg)
+      {
+            geometry_msgs::Twist vel_msg;
 
-        double angular = double (msg.ch1);
-        double speed = double (msg.ch2);
+            //ROS_INFO("IBUS angular: %d / linear: %d", msg.ch1, msg.ch2);
 
-        angular = - angular / 500.0;
-        speed = speed / 500.0;
+            double angular = double (msg.ch1);
+            double speed = double (msg.ch2);
 
-        vel_msg.linear.x = speed;
-        vel_msg.linear.y = 0;
-        vel_msg.linear.z = 0;
-        vel_msg.angular.x = 0;
-        vel_msg.angular.y = 0;
-        vel_msg.angular.z = angular;
+            angular = - angular / 500.0;
+            speed = speed / 500.0;
 
-        pub_.publish(vel_msg);
-    }
+            vel_msg.linear.x = speed;
+            vel_msg.linear.y = 0;
+            vel_msg.linear.z = 0;
+            vel_msg.angular.x = 0;
+            vel_msg.angular.y = 0;
+            vel_msg.angular.z = angular;
 
- private:
-  ros::Subscriber sub_;
-  ros::Publisher pub_;
+            pub_.publish(vel_msg);
+        }
+
+    private:
+        ros::Subscriber sub_;
+        ros::Publisher pub_;
 };
 
 int main(int argc, char **argv)
 {
-  // Set up ROS.
-  ros::init(argc, argv, "ibus_subscriber");
-  ros::NodeHandle nh;
+    // Set up ROS.
+    ros::init(argc, argv, "ibus_subscriber");
+    ros::NodeHandle nh;
 
-  // Create a new node_example::Talker object.
-  IBUSSubscriber node(nh);
+    // Create a new IBUSSubscriber node
+    IBUSSubscriber node(nh);
 
-  ROS_INFO("IBUS subscriber running...");
+    ROS_INFO("IBUS subscriber started...");
 
-  // Let ROS handle all callbacks.
-  ros::spin();
+    // Let ROS handle all callbacks.
+    ros::spin();
 
-  return 0;
+    return 0;
 }
 
 
