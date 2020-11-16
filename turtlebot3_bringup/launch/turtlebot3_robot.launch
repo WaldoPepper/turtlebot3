@@ -1,6 +1,7 @@
 <launch>
   <arg name="multi_robot_name" default=""/>
   <arg name="set_lidar_frame_id" default="base_scan"/>
+  <arg name="ibus_serial_port" default="/dev/ttyTHS1"/>
 
   <include file="$(find turtlebot3_bringup)/launch/turtlebot3_core.launch">
     <arg name="multi_robot_name" value="$(arg multi_robot_name)"/>
@@ -17,5 +18,7 @@
 
   <node pkg="turtlebot3_bringup" type="turtlebot3_ibus_subscriber" name="turtlebot3_ibus_subscriber" output="screen"/>
 
-  <node pkg="ibus_protocol" type="ibus_publisher" name="ibus_publisher" output="screen"/>
+  <node pkg="ibus_protocol" type="ibus_publisher" name="ibus_publisher" output="screen">
+    <arg name="serial_port_name" value="$(arg ibus_serial_port)"/>
+  <node/>
 </launch>
