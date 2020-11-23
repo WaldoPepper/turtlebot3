@@ -1,9 +1,7 @@
 <launch>
-  <node pkg="raspicam_node" type="raspicam_node" name="raspicam_node" output="screen">
-    <param name="camera_info_url" value="package://turtlebot3_bringup/camera_info/turtlebot3_rpicamera.yaml"/>
-    <param name="width" value="640"/>
-    <param name="height" value="480"/>
-    <param name="framerate" value="15"/>
-    <param name="camera_frame_id" value="camera"/>
-  </node>
+  <node pkg="topic_tools" type="throttle" name="throttle"
+      args="messages /video_source/raw 0.5" />
+
+  <node pkg="rosbag" type="record" name="rosbag_record_image"
+      args="record -o /home/kai/Temp/img_out /video_source/raw_throttle"/>
 </launch>
