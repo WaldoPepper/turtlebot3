@@ -11,7 +11,7 @@
     <arg name="set_frame_id" value="$(arg set_lidar_frame_id)"/>
   </include>
 
-  <include file="$(find turtlebot3_bringup)/launch/turtlebot3_rpicamera.launch">
+  <include file="$(find jetson_csi_cam)/jetson_csi_cam_inference.launch">
   </include>
 
   <node pkg="turtlebot3_bringup" type="turtlebot3_diagnostics" name="turtlebot3_diagnostics" output="screen"/>
@@ -19,6 +19,6 @@
   <node pkg="turtlebot3_bringup" type="turtlebot3_ibus_subscriber" name="turtlebot3_ibus_subscriber" output="screen"/>
 
   <node pkg="ibus_protocol" type="ibus_publisher" name="ibus_publisher" output="screen">
-    <arg name="serial_port_name" value="$(arg ibus_serial_port)"/>
-  <node/>
+    <param name="serial_port_name" value="$(arg ibus_serial_port)"/>
+  </node>
 </launch>
