@@ -16,9 +16,9 @@
 
   <node pkg="turtlebot3_bringup" type="turtlebot3_diagnostics" name="turtlebot3_diagnostics" output="screen"/>
 
-  <node pkg="turtlebot3_bringup" type="turtlebot3_ibus_subscriber" name="turtlebot3_ibus_subscriber" output="screen"/>
-
   <node pkg="ibus_protocol" type="ibus_publisher" name="ibus_publisher" output="screen">
     <param name="serial_port_name" value="$(arg ibus_serial_port)"/>
   </node>
+
+  <node pkg="ibus_protocol" type="ibus_subscriber_twist" name="ibus_subscriber" output="screen"/>
 </launch>
