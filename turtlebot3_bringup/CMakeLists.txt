@@ -48,10 +48,6 @@ add_executable(turtlebot3_diagnostics src/turtlebot3_diagnostics.cpp)
 add_dependencies(turtlebot3_diagnostics ${${PROJECT_NAME}_EXPORTED_TARGETS} ${catkin_EXPORTED_TARGETS})
 target_link_libraries(turtlebot3_diagnostics ${catkin_LIBRARIES})
 
-add_executable(turtlebot3_ibus_subscriber src/turtlebot3_ibus_subscriber.cpp)
-add_dependencies(turtlebot3_ibus_subscriber ${${PROJECT_NAME}_EXPORTED_TARGETS} ${catkin_EXPORTED_TARGETS})
-target_link_libraries(turtlebot3_ibus_subscriber ${catkin_LIBRARIES})
-
 ################################################################################
 # Install
 ################################################################################
